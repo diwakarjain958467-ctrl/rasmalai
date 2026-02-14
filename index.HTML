@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine 💗</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  width:100vw;
+  background: url("bg.png") no-repeat center center/cover;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial, sans-serif;
+  text-align:center;
+  overflow:hidden;
+  position:relative;
+}
+
+body::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(255,255,255,0.15);
+  z-index:1;
+}
+
+.container{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+  position:relative;
+  z-index:2;
+  max-width:95vw; /* responsive container */
+}
+
+h1{
+  margin:0;
+  color:#ff69b4;
+  font-weight:bold;
+  text-shadow:0 0 10px rgba(255,105,180,0.5);
+  word-break: break-word;
+}
+
+button{
+  padding:12px 28px;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+#yes{
+  background:white;
+  color:#ff4b7d;
+}
+
+#no{
+  background:#ff4b7d;
+  color:white;
+}
+
+/* Shake animation */
+@keyframes shake{
+  0%{transform:translateX(0);}
+  20%{transform:translateX(-8px);}
+  40%{transform:translateX(8px);}
+  60%{transform:translateX(-8px);}
+  80%{transform:translateX(8px);}
+  100%{transform:translateX(0);}
+}
+
+.shake{
+  animation:shake 0.4s;
+}
+
+/* Success screen */
+#success{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  gap:15px;
+  position:relative;
+  z-index:2;
+}
+
+#success img{
+  width:300px;        /* Shubhi image circle */
+  height:300px;
+  border-radius:50%;
+  border:4px solid white;
+  object-fit:cover;
+  opacity:1;
+  transition: opacity 1s ease;
+  max-width:90vw;     /* responsive */
+  max-height:90vh;
+}
+
+/* Photo text below */
+#gift-text{
+  color:#ff69b4;
+  font-size:18px;
+  margin:10px 0 0 0;
+  font-weight:bold;
+  max-width:90%;
+  text-align:center;
+  word-break: break-word;
+}
+
+/* Continue button styled as link for download */
+#continue-btn{
+  display:inline-block;
+  padding:10px 25px;
+  border:none;
+  border-radius:20px;
+  background:#ff4b7d;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  margin-top:10px;
+  text-decoration:none; /* remove underline */
+  transition:0.2s;
+}
+
+#continue-btn:hover{
+  background:#ff6f94;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Main Valentine prompt -->
+<div class="container" id="main">
+  <h1>Will you be my Valentine Shubhuuu 💗</h1>
+  <button id="yes">Yes ❤️</button>
+  <button id="no">No 💔</button>
+</div>
+
+<!-- Success screen -->
+<div class="container" id="success">
+  <h1>Yayy, I knew it 💗🥰✨</h1>
+  <img id="main-photo" src="shubhi.jpeg" alt="Shubhuuu">
+  <p id="gift-text">I have something for you 💝</p>
+  <!-- Continue button as download link -->
+  <a id="continue-btn" href="bhaskiii.jpeg" download="Letter_for_You.jpeg">Tap to Continue</a>
+</div>
+
+<audio id="music" src="love.mp3"></audio>
+
+<script>
+var noBtn = document.getElementById("no");
+var yesBtn = document.getElementById("yes");
+var main = document.getElementById("main");
+var success = document.getElementById("success");
+var music = document.getElementById("music");
+
+var texts = [
+  "Sure Sahiba? 😏",
+  "Firse Socho 🤔",
+  "Are you sure? 😜",
+  "Huhh Mithai?! 🍬",
+  "Say Yes Darling 😘",
+  "Please Rasmalai 🍮"
+];
+
+var count = 0;
+
+// No button shake & text change
+noBtn.onclick = function(){
+  noBtn.innerHTML = texts[count % texts.length];
+  count++;
+  noBtn.classList.add("shake");
+  setTimeout(function(){
+    noBtn.classList.remove("shake");
+  },400);
+};
+
+// Yes button: show success screen
+yesBtn.onclick = function(){
+  main.style.display="none";
+  success.style.display="flex";
+  music.play();
+};
+</script>
+
+</body>
+</html>
